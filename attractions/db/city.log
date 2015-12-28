@@ -1,0 +1,12 @@
+/*C2*/SET SCHEMA PUBLIC
+alter table Attraction_AttractionComment drop constraint UK_qn3yiduijbtgxys0ch3fj7w6m
+alter table Attraction_AttractionComment add constraint UK_qn3yiduijbtgxys0ch3fj7w6m  unique (comments_id)
+alter table Trail_TrailComment drop constraint UK_pje1ahhw27ip71nx795g8ygwc
+alter table Trail_TrailComment add constraint UK_pje1ahhw27ip71nx795g8ygwc  unique (comments_id)
+alter table Attraction_AttractionComment drop constraint UK_qn3yiduijbtgxys0ch3fj7w6m
+alter table Attraction_AttractionComment add constraint UK_qn3yiduijbtgxys0ch3fj7w6m  unique (comments_id)
+alter table Trail_TrailComment drop constraint UK_pje1ahhw27ip71nx795g8ygwc
+alter table Trail_TrailComment add constraint UK_pje1ahhw27ip71nx795g8ygwc  unique (comments_id)
+/*C3*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C2*/DISCONNECT

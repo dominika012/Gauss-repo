@@ -1,0 +1,39 @@
+<ui:composition
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	
+	template="/WEB-INF/template.xhtml"
+	>
+	
+	<ui:define name="title">Attractions</ui:define>
+	<ui:define name="content">
+<h:outputText value="&lt;br/&gt;" escape="false" />
+
+<h3><h:link outcome="attractions" value="&lt; Back to Attractions"/></h3>
+<h3><h:link outcome="trails" value="&lt; Back to Trails"/></h3>
+
+<h2>The Most Commented</h2>
+<br/>
+	<h3>Attractions</h3>
+	
+	<ol>
+		<ui:repeat var="attraction" value="#{topTenBean.attractions}"> 
+			<li>#{attraction.name}</li>		
+		</ui:repeat>
+	
+	</ol>
+<br/>
+	<h3>Trails</h3>
+	<ol>
+		<ui:repeat var="trail" value="#{topTenBean.trails}">
+			<li>#{trail.description}</li>		
+		</ui:repeat>
+	
+	</ol>
+<br/>
+<br/>
+<h:link outcome="#{loginBean.logout()}" value="Logout"/>
+	</ui:define>
+	
+</ui:composition>

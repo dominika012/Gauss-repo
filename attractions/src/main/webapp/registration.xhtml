@@ -1,0 +1,38 @@
+<ui:composition
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	
+	template="/WEB-INF/template.xhtml"
+	>
+	
+	<ui:define name="title">Trail</ui:define>
+	<ui:define name="content">
+	<h:outputText value="&lt;br/&gt;" escape="false" />
+
+	<h1>Registration</h1>
+
+	<h:form>
+		<h:outputLabel value=""/>
+			<br/>
+			Name
+			<br/>
+			<h:inputText value="#{editorBean.login}"/>
+			<br/>
+			Password
+			<br/>
+			<h:inputSecret value="#{editorBean.password1}"/>
+			<br/>
+			Password again
+			<br/>
+			<h:inputSecret value="#{editorBean.password2}"/>
+			<br/>
+			<br/>
+			<h:commandButton action="#{editorBean.submit}"
+				styleClass="btn btn-primary"
+				value="Submit" />
+		</h:form>	
+		
+	</ui:define>
+	
+</ui:composition>

@@ -1,0 +1,179 @@
+<ui:composition
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	
+	template="/WEB-INF/template.xhtml"
+	>
+
+<ui:define name="title">Welcome</ui:define>
+	<ui:define name="content">
+
+   <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="#">Welcome</a>
+            </div>
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <!-- Header -->
+    <a name="begin"></a>
+    <div class="intro-header" style="height: 350px">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                    	<h1>#{attractionBean.attraction.name}</h1>
+                        <hr class="intro-divider"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.intro-header -->
+
+    <!-- Page Content -->
+    
+ 
+   <a  name="attractions"></a>
+    <div class="content-section-a">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    
+				<h:panelGrid columns="1">
+					<h5>Type:</h5>
+					<h:outputText value= "#{attractionBean.attraction.type}" />
+				</h:panelGrid>	
+				<br/>
+				
+				<h:panelGrid columns="1">	
+					<h5>Description:</h5>
+				<h:outputText value="#{attractionBean.attraction.description}" />
+				</h:panelGrid>
+			<br/>
+			
+				<h:form>
+				
+					<h:commandButton action="#{attractionBean.edit}"
+								styleClass="btn btn-primary btn-block"
+								value=" Edit "
+							/>
+				</h:form>
+			</div>
+			
+			<div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                	<br/>
+        
+        
+        
+        
+        <div class="detailBox">
+    <div class="titleBox">
+      <label>Comment Box</label>
+        <button type="button" class="close" aria-hidden="true"></button>
+    </div>
+    <div class="actionBox">
+    
+        <ul class="commentList" value="#{attractionBean.comments}">
+            <li>
+                
+                <div class="commentText">
+                    <p class=""> #{attractionBean.comment.text} </p> 
+                    
+                    <span class="date sub-text">on March 5th, 2014</span>
+
+                </div>
+            </li>
+            <li>
+                <div class="commenterImage">
+                  <img src="http://lorempixel.com/50/50/people/7" />
+                </div>
+                <div class="commentText">
+                    <p class="">Hello this is a test comment and this comment is particularly very long and it goes on and on and on.</p> <span class="date sub-text">on March 5th, 2014</span>
+
+                </div>
+            </li>
+            <li>
+                <div class="commenterImage">
+                  <img src="http://lorempixel.com/50/50/people/9" />
+                </div>
+                <div class="commentText">
+                    <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
+
+                </div>
+            </li>
+        </ul>
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Your comments" />
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+        
+        
+        
+    <h:form>
+	<br/>
+	<br/>
+		<h:outputLabel value="Add Comment"/>
+		<h:inputText value="#{attractionBean.attractionComment.text}" />
+	
+	<h:commandButton action="#{attractionBean.submit}" 
+				value="Submit"/>
+	
+	</h:form>
+	
+	<h:form>
+	
+	<h2>Comments</h2>
+	
+	<h:dataTable var="comment" value="#{attractionBean.comments}" styleClass="table">
+	<h:column>
+				<f:facet name="header">Date</f:facet>
+				<h:link outcome="comment" value="#{comment.date}">
+						<f:param name="id" value="#{comment.id}"/>
+					</h:link>
+			</h:column>
+	<h:column>
+				<f:facet name="header">Attraction</f:facet>
+				<h:link outcome="comment" value="#{comment.text}">
+						<f:param name="id" value="#{comment.id}"/>
+					</h:link>
+			</h:column>
+					
+	</h:dataTable>
+	</h:form>
+             </div>
+			
+			
+		</div>
+	</div>
+</div>
+	
+	
+	<br/>
+<br/>	
+	</ui:define>
+	
+</ui:composition>

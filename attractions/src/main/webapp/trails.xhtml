@@ -1,0 +1,63 @@
+<ui:composition
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	
+	template="/WEB-INF/template.xhtml"
+	>
+	
+	<ui:define name="title">Trails</ui:define>
+	<ui:define name="content">
+<h:outputText value="&lt;br/&gt;" escape="false" />
+
+<h3><h:link outcome="topTen" value="Go To Top 10 Attractions and Trails &gt;"/></h3>
+<h3><h:link outcome="trails" value="Go To Trails &gt;"/></h3>
+
+
+		<h1>Trails</h1>
+		
+		<h:form>		
+	<h:dataTable var="trail" value="#{trailsBean.trails}" styleClass="table">
+			<h:column>
+			<f:facet name="header">
+            	<h:outputText value="Name" />
+        	</f:facet>
+				<f:facet name="header"></f:facet>
+				<h:link outcome="trail" value="#{trail.description}">
+						<f:param name="trailId" value="#{trail.id}"/>
+					</h:link>
+			</h:column>
+			
+			<h:column>
+					<f:facet name="header">Number of attractions</f:facet>
+					#{trail.attractions.size()}
+				</h:column>
+
+		</h:dataTable>
+		</h:form>
+		
+		
+		<h:form>
+			<h:outputLabel value="Add Trail"/>
+			<br/>
+			Name
+			<br/>
+			<h:inputText value="#{trailsBean.trail.description}"/>
+			<br/>
+			
+			
+			
+			<br/>
+			<h:commandButton action="#{trailsBean.submit}"
+				styleClass="btn btn-primary"
+				value="Submit" />
+		</h:form>
+<br/>	
+		
+<br/>
+<h:link outcome="#{loginBean.logout()}" value="Logout"/>
+		
+		</ui:define>
+	
+</ui:composition>
+		

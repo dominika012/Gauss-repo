@@ -1,0 +1,212 @@
+<ui:composition
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	
+	template="/WEB-INF/template.xhtml"
+	>
+
+<ui:define name="title">Welcome</ui:define>
+	<ui:define name="content">
+
+     <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="#">Welcome</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#begin">Begin</a>
+                    </li>
+                    <li>
+                        <a href="#attractions">Attractions</a>
+                    </li>
+                    <li>
+                        <a href="#trails">Trails</a>
+                    </li>
+                    <li>
+                        <a href="#login">Login</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <!-- Header -->
+    <a name="begin"></a>
+    <div class="intro-header">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                    	<h1>VIKEAST</h1>
+                        <h3>Visit Kosice and East</h3>
+                        <hr class="intro-divider"/>
+                        <h5>Welcome</h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.intro-header -->
+
+    <!-- Page Content -->
+
+
+	<a  name="attractions"></a>
+    <div class="content-section-a">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer"/>
+                    <div class="clearfix"></div>
+                    <h1 class="section-heading">Attractions</h1>
+                    <br/>
+                    <ul style="list-style-type:none">
+						<ui:repeat var="attraction" value="#{attractionsBean.attractions}"> 
+							<f:facet name="header"></f:facet>
+							<li>
+								<h2>
+									<h:link outcome="attraction" value="#{attraction.name}">
+										<f:param name="id" value="#{attraction.id}"/>
+									</h:link>
+								</h2>
+							</li>	
+								
+							<li>Type: #{attraction.type}</li>	
+							<br/>
+							<li><p class="lead">#{attraction.description}</p></li>	
+							<br/>
+						</ui:repeat>
+					
+					</ul>
+ 				</div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                	<br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                                      
+                    <img class="img-responsive" src="img/elizabeth.jpg" alt=""/>
+                    Cathedral of St. Elizabeth and St. Michaels Chapel and Cathedral
+                    <br/>
+                    <br/>
+                    <img class="img-responsive" src="img/swan.JPG" alt=""/>
+                    Black swan at the Zoo
+                    <br/>
+                    <br/>
+                    <img class="img-responsive" src="img/theatre.jpg" alt=""/>
+                    State Theatre and Singing fountain
+                    <br/>
+                    <br/>
+                    <img class="img-responsive" src="img/jakab.jpg" alt=""/>
+                    Jakabs Palace
+                    <br/>
+                    <br/>
+                    <img class="img-responsive" src="img/botanical.jpg" alt=""/>
+                    Botanical Garden
+                    <br/>
+                    <br/>
+                    <img class="img-responsive" src="img/tabacka.jpg" alt=""/>
+                     <img class="img-responsive" src="img/tabacka2.jpg" alt=""/>
+                    Tabacka Kulturfabrik
+                    <br/>
+                    <br/>
+                    <img class="img-responsive" src="img/vsm.jpg" alt=""/>
+                     <br/>
+                    <img class="img-responsive" src="img/museum.jpg" alt=""/>
+                    East Slovak Museum, Rakoczis sculpture
+                    <br/>
+                    <br/>
+                    <img class="img-responsive" src="img/miklus.JPG" alt=""/>
+                    East Slovak Museum, Miklus prison
+                    <br/>
+                    <br/>
+                    <img class="img-responsive" src="img/anicka.jpg" alt=""/>
+                    Park Anicka
+                    <br/>
+                    <br/>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+    
+	<a  name="trails"></a>
+    <div class="content-section-b">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer"/>
+                    <div class="clearfix"></div>
+                    <h1 style="color:#28774A" class="section-heading">Trails</h1>
+                     <br/>
+                    <ul style="list-style-type:none">
+						<ui:repeat var="trail" value="#{trailsBean.trails}"> 
+						
+							<li><h3>#{trail.description}</h3></li>	
+									
+							<br/>
+						</ui:repeat>
+					
+					</ul>
+ 				</div>
+ 				
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                <br/>
+ 				<br/>
+ 				<br/>
+ 				<br/>
+ 				<br/>
+ 				<br/>
+ 				<br/>
+                    <img class="img-responsive" src="img/trail.jpg" alt=""/>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-b -->
+
+<h:messages style="color:#E62D2D" showDetail="true" />
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                   
+                    <p class="copyright text-muted small">Copyright Dominika 2015. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+   
+	</ui:define>
+	
+</ui:composition>

@@ -1,0 +1,85 @@
+<ui:composition
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/template.xhtml"
+	>
+	
+<ui:define name="title">Edit Attraction</ui:define>
+	<ui:define name="content">
+	<h:outputText value="&lt;br/&gt;" escape="false" />
+	
+	
+	 <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="#">Welcome</a>
+            </div>
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <div class="intro-header" style="padding: 0px 0px 0px 0px" >
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                    <h1>Edit</h1>
+                    	<h1>#{attractionBean.attraction.name}</h1>
+                    	
+                        <hr class="intro-divider"/>
+            
+			<h4>Type:</h4>
+			<h:selectOneMenu style="color:#5A5A5A" value="#{attractionBean.selectedType}">
+				<f:selectItem itemValue="Historical" itemLabel="Historical" />
+				<f:selectItem itemValue="Cultural" itemLabel="Cultural" />
+				<f:selectItem itemValue="Relax" itemLabel="Relax" />
+			</h:selectOneMenu>
+			
+		<br/>
+		<br/>	
+			<h4>Description:</h4>
+			<h:inputTextarea cols="47" rows="5" style="color:#5A5A5A" value ="#{attractionBean.description}"/>
+		<br/>
+		<br/>
+	<h:commandButton class="btn btn-primary intro-divider" action="#{attractionBean.sedit}" 
+				value="Edit"/>
+				<br/>
+	
+	<h:commandButton class="btn btn-primary intro-divider" action="#{attractionBean.goToAttraction}" 
+				value="Go Back, dont change"/>
+                        
+                        
+                        
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.intro-header -->
+
+    <!-- Page Content -->
+    
+	<br/>
+	<br/>
+	<br/>
+	
+
+        
+	
+	</ui:define>
+	
+</ui:composition>

@@ -1,0 +1,66 @@
+<ui:composition
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	
+	template="/WEB-INF/template.xhtml"
+	>
+	
+	<ui:define name="title">Attractions</ui:define>
+	<ui:define name="content">
+<h:outputText value="&lt;br/&gt;" escape="false" />
+
+<h3><h:link outcome="topTen" value="Go To Top 10 Attractions and Trails &gt;"/></h3>
+<h3><h:link outcome="trails" value="Go To Trails &gt;"/></h3>
+
+
+		<h1>Attractions</h1>
+			
+		
+		<h:form>
+			<h:outputLabel value="Add Attraction"/>
+			<br/>
+			Name
+			<br/>
+			<h:inputText value="#{attractionsBean.attraction.name}"/>
+			<br/>
+			Description
+			<br/>
+			<h:inputTextarea value ="#{attractionsBean.attraction.description}"/>
+			<br/>
+			Type
+			<br/>
+			<h:selectOneMenu value="#{attractionsBean.selectedType}">
+				<f:selectItem itemValue="Historical" itemLabel="Historical" />
+				<f:selectItem itemValue="Cultural" itemLabel="Cultural" />
+				<f:selectItem itemValue="Relax" itemLabel="Relax" />
+			</h:selectOneMenu>
+			<br/>
+			<br/>
+			<h:commandButton action="#{attractionsBean.submit}"
+				styleClass="btn btn-primary"
+				value="Submit" />
+		</h:form>
+<br/>		
+<h:form>		
+	<h:dataTable var="attraction" value="#{attractionsBean.attractions}" styleClass="table">
+			<h:column>
+			<f:facet name="header">
+            	<h:outputText value="List of Attrctions in Kosice" />
+        	</f:facet>
+				<f:facet name="header"></f:facet>
+				<h:link outcome="attraction" value="#{attraction.name}">
+						<f:param name="id" value="#{attraction.id}"/>
+					</h:link>
+			</h:column>
+	
+
+		</h:dataTable>
+</h:form>	
+
+
+<br/>
+<br/>		
+	</ui:define>
+	
+</ui:composition>

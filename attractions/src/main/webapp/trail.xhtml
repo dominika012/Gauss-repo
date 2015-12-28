@@ -1,0 +1,85 @@
+<ui:composition
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	
+	template="/WEB-INF/template.xhtml"
+	>
+	
+	<ui:define name="title">Trail</ui:define>
+	<ui:define name="content">
+<h:outputText value="&lt;br/&gt;" escape="false" />
+
+	<h:form>
+	
+	<h:commandButton action="#{trailBean.goToTrails}"
+				styleClass="btn btn-primary"
+				value=" &lt; &lt; Back To Trails"
+			/>
+	</h:form>
+
+		<h2>Current Trail: #{trailBean.trail.description} </h2>
+		<br/>
+		<h3>Attractions</h3>
+		<ul>
+			<ui:repeat var="attraction" value="#{trailBean.trail.attractions}">
+				<li>#{attraction.name}</li>				
+			</ui:repeat>
+		</ul>
+		<br/>
+		<h:form>
+			Select attraction to Trail
+			<br/>
+			<h:selectOneMenu value="#{trailBean.selectedAttractionId}">
+				<f:selectItems 
+					var="a"
+					value="#{trailBean.availableAttractions}"
+					itemLabel="#{a.name}"
+					itemValue="#{a.id}"
+				/>
+			</h:selectOneMenu>
+			<h:commandButton action="#{trailBean.assignAttraction}"
+				styleClass="btn btn-primary"
+				value="Add Trail"
+			/>
+		</h:form>
+		
+		<h:form>
+	<br/>
+	
+	<h:form>
+	<h:panelGrid>
+	<br/>
+	<br/>
+		<h5>Add Comment</h5>
+		<h:inputTextarea value="#{trailBean.comment.text}" />
+	
+	<h:commandButton action="#{trailBean.submit}" 
+				value="Submit"/>
+	
+	</h:panelGrid>
+	</h:form>
+	
+	<br/>
+	<h2>Comments</h2>
+	
+	<h:dataTable var="comment" value="#{trailBean.comments}" styleClass="table">
+	
+	
+	<h:column>
+				<f:facet name="header"></f:facet>
+				<h:link outcome="comment" value="#{comment.text}">
+						<f:param name="id" value="#{comment.id}"/>
+					</h:link>
+			</h:column>
+	</h:dataTable>
+	</h:form>
+		
+		<br/>
+<br/>
+<h:link outcome="#{loginBean.logout()}" value="Logout"/>
+		
+		
+	</ui:define>
+	
+</ui:composition>

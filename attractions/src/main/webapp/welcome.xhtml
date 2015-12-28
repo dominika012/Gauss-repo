@@ -1,0 +1,61 @@
+<ui:composition
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	
+	template="/WEB-INF/template.xhtml"
+	>
+	
+	<ui:define name="title">Visit Kosice</ui:define>
+	<ui:define name="content">
+	<h:outputText value="&lt;br/&gt;" escape="false" />
+
+<h1>Visit Kosice</h1>
+	<h3>Attractions</h3>
+		<ul>
+			<ui:repeat var="attraction" value="#{attractionsBean.attractions}">
+				<li>#{attraction.name}</li>				
+			</ui:repeat>
+		</ul>
+
+	<h3>Trails</h3>
+		<ul>
+			<ui:repeat var="trail" value="#{trailsBean.trails}">
+				<li>#{trail.description}</li>				
+			</ui:repeat>
+		</ul>
+		
+		<br/>
+		If you want to edit data, just register here:
+		<br/>
+		<h:form>
+		<h:outputLabel value=""/>
+			<br/>
+			Name
+			<br/>
+			<h:inputText value="#{editorBean.login}"/>
+			<br/>
+			Password
+			<br/>
+			<h:inputSecret value="#{editorBean.password1}"/>
+			<br/>
+			Password again
+			<br/>
+			<h:inputSecret value="#{editorBean.password2}"/>
+			<br/>
+			<br/>
+			<h:commandButton action="#{editorBean.submit}"
+				styleClass="btn btn-primary"
+				value="Submit" />
+		</h:form>	
+		
+		<br/>
+		If you are registered already...  <h4><h:link outcome="login" value="sing in"/></h4>
+		<br/>
+<br/>
+<br/>
+<h:link outcome="#{loginBean.logout()}" value="Logout"/>
+		
+	</ui:define>
+	
+</ui:composition>

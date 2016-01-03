@@ -1,229 +1,191 @@
-import java.lang.reflect.Array;
+
+
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.regex.Pattern;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+
+import org.ojalgo.type.keyvalue.MapEntry;
 
 
+    
 
 public class Main {
-	private static double[][]  matrix =
-        { { 6, -3, 2, 4, 5, 5},
-          { 0, 0, 1, 2, 4, 8},
-          { 0, 0, 2, 4, 8, 12},
-          { 0, 0, 0, 6, 1, 9}
-};
-	
-	static int rows = 4;
-	static int columns = 5+1;
-	static int rankLeft = 2;
-	static int rank = 2;
-	static int freeValuesCounter = columns - 1 - rankLeft;
-	
-	static String[] result = new String[columns-1];
-	
-	private static void printMatrix(String string, double[][] doubles){
-		System.out.println();
-		System.out.println(string + "\n");
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < columns; j++) {
-				System.out.print(doubles[i][j] +"\t");
-			}
-			System.out.println();
-		}
-	}
-	
-	public boolean isZeroRow(int r){
-		boolean isOk=false;
-		int counter = 0;
-		for (int i = 0; i < columns; i++) {
-			if (matrix[r][i]==0) 
-				counter+=1;
-		}
-		
-		if (counter==matrix.length) 
-			isOk=true;
-		else isOk=false;
-		
-		return isOk;
-	}
-	
-	//ok
-	public static boolean isStringFraction(String string){
-		String[] substrings = string.split(Pattern.quote("."));
-		System.out.println("-----------" + string);
-		
-		int s1=0,s2;
-		if(substrings.length>2 || string==null)
-			return false;
-		else{
-			try{
-				for(String s:substrings){
-					Integer.parseInt(s);
-				}
-				s1=Integer.parseInt(substrings[0]);
-				s1=Integer.parseInt(substrings[1]);
-				return true;
-			}
-			catch (NumberFormatException e){
-				return false;
-			}
-		}
-	}
-	
-	public static String solutionResult(String s){
-		StringBuilder sb = new StringBuilder();
-		sb.append(s + " ");
-		System.out.print(sb.toString());
-		return sb.toString();
-	}
-	
-	public static String[] stringSolution(double[] doubles){
-		String[] arr = new String[doubles.length];
-		int iterator=0;
-		for(int i = 0; i < doubles.length; i++){
-			String s = String.valueOf(doubles[iterator]);
-			arr[iterator]= s;
-				solutionResult(s);
-			if(s!="NaN" || s!="Infinity") result[i]=s;
-			iterator+=1;
-		}
-		return arr;
-	}
-	
-	public static double[] solution(){
-		// back substitution
-		int N;
-		if(rows>columns) N=columns-1;
-		else N=rows;
-        double[] x = new double[N];
+        
+    //public Object[] solution = new Object[]
+    
+    public static double[][] matrix =
+        {{1,-1, 1, 1,-1, 2, 1, 1},
+         {0, 2, 1, 1, 0, 1,-1, 2},
+         {0, 0, 0, 1, 1, 2, 1, 0},
+         {0, 0, 0, 0, 1, 0, 1, 1},
+         {0, 0, 0, 0, 0, 0, 3, 3}};
+    
+    public static int columns = 7;
+    public static int rows = 5;
+    
+    
+    public static String[] paramString = {"m","n","p","r","s","t","u","v","w","z"};
+    public static List<String> params = new ArrayList<String>(Arrays.asList(paramString));
+    
+    public static List<Map<String, Double>> rowsMaps = new ArrayList<Map<String, Double>>();
+    
+    public static Map<String, Map<String,Double>> result=new HashMap<String, Map<String,Double>>();
+    
+    
+    /*
+    public static List<Map<String, Double>> solution(){
+        // back substitution
+        int N;
+        if(rows>columns) N=columns-1;
+        else N=rows;
+        Map<String, Double> sum = new HashMap<String, Double>();
         for (int i = N - 1; i >= 0; i--) {
-            double sum = 0.0;
             for (int j = i + 1; j < N; j++) {
-                sum += matrix[i][j] * x[j];
+                sum += matrix[i][j] * x.get(j);
             }
-            x[i] = (matrix[i][columns-1] - sum) / matrix[i][i];
+            x.get(i) = (matrix[i][columns-1] - sum) / matrix[i][i];
         }
-        stringSolution(x);
         return x;
-	}
-	
-	
-	private static int frobenyResult(){
-		 int frob=2;
-	        
-	        if (rankLeft!=rank) frob=-1;
-	        else if (rankLeft==rank && rank<columns-1) frob=1;
-	        else if (rankLeft==rank && rank==columns-1)frob=0;
-	        
-	     return frob;
-	}
-	
-    private static void frobeny(){
-        String eq = "";
-        String statement = "";
-
-        switch (frobenyResult()) {
-            case -1:
-                eq= "h(A)" + "\u2260" + "h'(A)";
-                statement = " Sustava nema riesenie";
-                break;
-            case 1:
-                eq= "h(A) = h'(A) < n \t\t" + rank + "<" + columns;
-                statement = " Sustava ma nekonecne vela rieseni";
-                break;
-            case 0:
-                eq= "h(A) = h'(A) = n = " + columns;
-                statement = " Sustava ma prave jedno riesenie";
-                break;
-            default: statement = " Nevalidny stav";
-                break;
+    }
+    */
+    public static Map<String,Double> multiplyByConst(Map<String,Double> map, double a){
+        Double d = new Double(a);
+        Map<String,Double> returnedMap = new HashMap<String,Double>();
+        for(String s : map.keySet())
+        {
+        	returnedMap.put(s, map.get(s)*d);
         }
-        System.out.println(statement);
-    }
-	
-    private static void linearCombination(){
-    	int values = matrix.length-rank;
+        return returnedMap;
     }
     
-    private static String[] result(){
-    	
-    	int n = columns-1;
-    	Object[] diag = new Object[n];
-    	
-    	Double zeroObj = 0.0;
-    	String[] bigParams = {"m","n","p","r","s","t","u","v","w","z"};
-    	String[] smallParams = {"t","s","u","v","w"};
-    	
-    	String[] params = null;
-    	
-    	if (n<6) 
-			params = smallParams;
-    	else
-    		params = bigParams;
-    	
-    	int paramCounter = 0;
-    	
-			for (int j = n-1; j >=0 ; j--) {
-				if(j<rows)
-				  diag[j]=matrix[j][j];
-				else
-					diag[j]=null;
-				//unvalid diag. value
-				if (diag[j]==null || zeroObj == (double) diag[j]) {
-					diag[j] = params[paramCounter];
-					result[j]= params[paramCounter];
-					paramCounter+=1;
-					int helper = j+1;
-					System.out.println(" Nech x" + helper + " = " + diag[j]);
-				}
-				//valid diag. value -> print row -> try to solve
-				else{
-					prinRow(j);
-				}
-			}
-			return params;
+    public static Map<String,Double> divideByConst(Map<String,Double> map, double a){
+        Double d = new Double(a);
+        Map<String,Double> returnedMap = new HashMap<String,Double>();
+        for(String s : map.keySet())
+        {
+        	returnedMap.put(s, map.get(s)/d);
+        }
+        return returnedMap;
     }
     
-    private static String sign(double d){
-    	String s="";
-    	if (d<0) s=" ";
-    	else s="+";
-    	return s;
+    //sum all maps at list
+    public static Map<String, Double> add(List<Map<String, Double>> maplist) {
+        Map<String, Double> result = new HashMap<String, Double>();
+        for (Map<String, Double> map : maplist) {
+            for (Map.Entry<String, Double> entry : map.entrySet()) {
+                String key = entry.getKey();
+                Double current = result.get(key);
+                result.put(key, current == null ? entry.getValue() : entry.getValue() + current);
+            }
+        }
+        return result;
     }
     
-    private static void printValue(double d, int index){
-    	index+=1;
-    	if (d!=0)
-    			System.out.print(sign(d) + d + "x" + index + " ");
+    
+    public static void addToRowsMap(){
+    	for(int i=rows-1;i>=0;i--){
+            Map<String,Double> map= new HashMap<String,Double>();
+            for(int j=0;j<columns;j++){
+                StringBuilder s = new StringBuilder("x");
+                s.append(j);
+                Double d = new Double(matrix[i][j]);
+                map.put(s.toString(),d);
+            }
+            map.put("n", matrix[i][columns]);
+            rowsMaps.add(map);
+        }
     }
     
-    private static void prinRow(int r){
-    	for (int i = 0; i < columns-1; i++) {
-    		printValue(matrix[r][i],i);
-		}
-    	System.out.print("= " + matrix[r][columns-1]);
-    	System.out.println();
-    }
     
-    private static void printResult(){
-    	for(int i=0; i<result.length; i++){
-    		if(result[i]==null) System.out.println("null");
-    		else System.out.println(result[i].toString());
-		}
-    }
     
-	public static void main(String[] args) {
-		
-		//printMatrix("Matrix", matrix);
-		//triangleForm(matrix);
-		printMatrix("Matrix", matrix);
-		//frobeny();
-		
-		
-		//test();
-		//stringSolution(solution());
-		//result();
-		//printResult();
-		prinRow(2);
-	}
-	
+    public static void main(String[] args)
+    { 
+    	
+    	addToRowsMap();
+    	
+        Map<String,Double> map6= new HashMap<String,Double>();
+        map6.put("n", 1.0);
+        result.put("x6", map6);
+        Map<String,Double> map5= new HashMap<String,Double>();
+        map5.put("t", 1.0);
+        result.put("x5", map5);
+        Map<String,Double> map4= new HashMap<String,Double>();
+        map4.put("n", 0.0);
+        result.put("x4", map4);
+        Map<String,Double> map3= new HashMap<String,Double>();
+        map3.put("n", -1.0);
+        map3.put("t", -2.0);
+        result.put("x3", map3);
+        Map<String,Double> map2= new HashMap<String,Double>();
+        map2.put("u", 1.0);
+        result.put("x2", map2);
+        /*Map<String,Double> map1= new HashMap<String,Double>();
+        map1.put("n", 2.0);
+        map1.put("t", 0.5);
+        map1.put("u", -0.5);
+        result.put("x1", map1);
+        Map<String,Double> map0= new HashMap<String,Double>();
+        map0.put("n", 3.0);
+        map0.put("t", 0.5);
+        map0.put("u", -0.5);
+        result.put("x0", map0);*/
+        
+        
+        
+        System.out.println("result \n" + result);
+        Map<String,Double> mapOfCurrentRow= new HashMap<String,Double>();
+        mapOfCurrentRow = rowsMaps.get(3);
+        System.out.println("Map of Current row \n" + mapOfCurrentRow + "\n\n");
+        
+       
+        List<Map<String, Double>> listOfMaps = new ArrayList<Map<String, Double>>();
+        String key = null;
+        Double constant = 0.0;
+        for (Map.Entry<String, Map<String, Double>> mapsEntry : result.entrySet()) {
+            key = mapsEntry.getKey();
+            constant = mapOfCurrentRow.get(key);
+	            Map<String,Double> multipliedRow = new HashMap<String,Double>();
+	            multipliedRow = multiplyByConst(mapsEntry.getValue(), constant*(-1));
+	            listOfMaps.add(multipliedRow);
+	            mapOfCurrentRow.put(key, null);
+        }
+        System.out.println((listOfMaps));
+        
+        Map<String,Double> helper= new HashMap<String,Double>();
+        
+        for(Map.Entry<String,Double> map : mapOfCurrentRow.entrySet()){
+        	String s = map.getKey();
+        	Double d = map.getValue();
+        	if(d!=null && d!=0)
+        	helper.put(s, d);
+        		
+        }
+        listOfMaps.add(helper);
+        helper = add(listOfMaps);
+        System.out.println(helper);
+        helper = divideByConst(helper, 2);
+        System.out.println(helper);
+        int counter = 6;
+        for(Map.Entry<String,Double> map : helper.entrySet()){
+        	String s = map.getKey();
+        	Double d = map.getValue();
+        	if(s.startsWith("x")){
+        		helper.put(params.get(0), helper.get(s));
+        		helper.remove(s);
+        		params.remove(0);
+        	}
+        	System.out.println(map);
+        		
+        }
+    }
+
+
+    public static void solve(Map<String, Double> row) {
+        
+    }
 }
+
